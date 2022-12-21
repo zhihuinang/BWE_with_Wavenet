@@ -41,8 +41,8 @@ def train(model,optimizer,train_loader,config):
                               dynamic_ncols=True)
         for data in epoch_iterator:
             Hi_audio = data['Hi_audio']
-            Lo_spec = data['Lo_spec']
-            input_Hi_audio = mulaw_quantize(Hi_audio)
+            Lo_spec = data['Lo_spec'].to('cuda')
+            input_Hi_audio = mulaw_quantize(Hi_audio).to('cuda')
       
             output = model(input_Hi_audio,Lo_spec)
             loss = criterion(output,input_Hi_audio.long())
@@ -53,20 +53,22 @@ def train(model,optimizer,train_loader,config):
             optimizer.step()
             optimizer.zero_grad()
             global_step += 1
-
+            output = output.to('cpu')
             _, pred = torch.max(output,dim=1) 
 
             ori_output = inv_mulaw_quantize(pred)*(2**15)
             lsd = LSD(ori_output,Hi_audio)
             total_lsd += lsd
 
-        Lsd = total_loss / len(train_loader)
-        logger.info('finish training {} epoch, LSD = {}'.format(i+1, Lsd))
+        Lsd = total_lsd / len(train_loader)
+        print(Lsd)
+        err = total_loss/ len(train_loader)
+        logger.info('finish training {} epoch, Loss = {}, LSD = {}'.format(i+1, err, Lsd))
         total_lsd = 0
         if Lsd < best_Lsd:
             best_Lsd = Lsd
             save_checkpoint(model,config)
-
+            logger.info("Saved model checkpoint to [DIR: %s]", config['ckpt'])
     return 
     
 
@@ -80,16 +82,16 @@ def get_dataloader(file,mode='train'):
     bwe_dataset = BWE_dataset(sample_list,mode=mode)
     if mode == 'train':    
         data_loader = DataLoader(bwe_dataset,
-                            batch_size = 12,
+                            batch_size = 4,
                             shuffle=True,
                             drop_last=True,
-                            num_workers = 8)
+                            num_workers = 0)
     else: 
         data_loader = DataLoader(bwe_dataset,
-                            batch_size = 48,
+                            batch_size = 8,
                             shuffle=False,
                             drop_last=True,
-                            num_workers = 4)
+                            num_workers = 0)
     return data_loader
 
 
@@ -109,10 +111,10 @@ def main(config):
     
     if os.path.isfile('{}/model.pth'.format(ckpt)):
         logger.info("------resuming last training------")
-        checkpoint = torch.load('{}/model/model.pth'.format(ckpt),map_location='cpu')
+        checkpoint = torch.load('{}/model.pth'.format(ckpt),map_location='cpu')
         model.load_state_dict(checkpoint['net'])
     
-    
+    model = model.to('cuda')
     
     optimizer = Adam(model.parameters(),lr = 1e-4)
 

@@ -66,14 +66,19 @@ def inv_mulaw_quantize(y, mu=256):
 def LSD(output,target):
     output = np.array(output)
     target = np.array(target)
-    target_spectrogram = librosa.core.stft(target, n_fft=2048)
-    output_spectrogram = librosa.core.stft(output, n_fft=2048)
+    B,_ = output.shape
+    total_lsd = 0
+    for i in range(B):
+        target_spectrogram = librosa.core.stft(target[i,:], n_fft=2048)
+        output_spectrogram = librosa.core.stft(output[i,:], n_fft=2048)
  
-    target_log = np.log10(np.abs(target_spectrogram) ** 2)
-    output_log = np.log10(np.abs(output_spectrogram) ** 2)
-    output_target_squared = (output_log - target_log) ** 2
-    lsd = np.mean(np.sqrt(np.mean(output_target_squared, axis=1)))
- 
+        target_log = np.log10(np.abs(target_spectrogram) ** 2)
+        output_log = np.log10(np.abs(output_spectrogram) ** 2)
+        output_target_squared = (output_log - target_log) ** 2
+        lsd = 2 * (np.sum(output_target_squared))/(1024 * output_spectrogram.shape[1])
+
+        total_lsd += lsd
+    lsd = total_lsd / B
     return lsd
 
 
@@ -89,5 +94,5 @@ def save_checkpoint(model, config):
     os.makedirs(ckpt,exist_ok=True)
     torch.save(checkpoint,
                   '{}/model.pth'.format(ckpt))
-    logger.info("Saved model checkpoint to [DIR: %s]", ckpt)
+    
 

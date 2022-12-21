@@ -79,7 +79,7 @@ class ResnetBlock(nn.Module):
         return out, outputs
 
 class WaveNet(nn.Module):
-    def __init__(self, channels_in, channels_out=256, dilations=[1,2,4,8,16,32]):
+    def __init__(self, channels_in, channels_out=256, dilations=[1,2,4,8,16,32,64]):
         super(WaveNet, self).__init__()
         
         self.conv1d = nn.Conv1d(in_channels=channels_in, out_channels=channels_out, kernel_size=3,padding=1,bias=False)
