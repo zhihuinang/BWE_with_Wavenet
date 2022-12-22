@@ -22,7 +22,7 @@ class Aconv1d(nn.Module):
 
         return outputs
 
-
+ 
 class Condition_conv(nn.Module):
     # get the conditional input:Mel_spec of shape (B,1,h,w)
     # to the conditional h: of shape (B,C,1)

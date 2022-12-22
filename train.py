@@ -13,7 +13,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torch.optim import Adam
 
-from model.wavenet import *
+from model.X_net import *
 from dataset.dataloader import *
 from utils import *
 
@@ -24,13 +24,12 @@ logger = logging.getLogger(__name__)
 
 def train(model,optimizer,train_loader,config):
     epoch = config['epoch']
-    criterion = nn.CrossEntropyLoss()
     best_Lsd = 9999999
     global_step = 0
-    t_total = epoch * len(train_loader)
+    t_total = epoch[0] * len(train_loader)
     
 
-    for i in range(epoch):
+    for i in range(epoch[0]):
         total_loss = 0
         total_lsd = 0
         model.zero_grad()
@@ -41,11 +40,11 @@ def train(model,optimizer,train_loader,config):
                               dynamic_ncols=True)
         for data in epoch_iterator:
             Hi_audio = data['Hi_audio']
-            Lo_spec = data['Lo_spec'].to('cuda')
-            input_Hi_audio = mulaw_quantize(Hi_audio).to('cuda')
-      
-            output = model(input_Hi_audio,Lo_spec)
-            loss = criterion(output,input_Hi_audio.long())
+            Lo_audio = data['Lo_audio']
+            Lo_res,Hi_res = model(Hi_audio)
+            loss_lo = T_MSE_Loss(Lo_res,Lo_audio)
+            loss_hi = T_MSE_Loss(Hi_res,Hi_audio)
+            loss = 0.5 * loss_lo + 0.5 * loss_hi
             epoch_iterator.set_description(
                     "Training (%d / %d Steps) (loss=%2.5f)" % (global_step, t_total, loss.item()))
             loss.backward()
@@ -53,22 +52,63 @@ def train(model,optimizer,train_loader,config):
             optimizer.step()
             optimizer.zero_grad()
             global_step += 1
-            output = output.to('cpu')
-            _, pred = torch.max(output,dim=1) 
-
-            ori_output = inv_mulaw_quantize(pred)*(2**15)
-            lsd = LSD(ori_output,Hi_audio)
+          
+            lsd = LSD(Hi_res,Hi_audio)
             total_lsd += lsd
 
         Lsd = total_lsd / len(train_loader)
-        print(Lsd)
         err = total_loss/ len(train_loader)
         logger.info('finish training {} epoch, Loss = {}, LSD = {}'.format(i+1, err, Lsd))
         total_lsd = 0
         if Lsd < best_Lsd:
             best_Lsd = Lsd
-            save_checkpoint(model,config)
+            save_checkpoint(model,config,'ph1')
             logger.info("Saved model checkpoint to [DIR: %s]", config['ckpt'])
+
+    logger.info("--------------------Finish training Phase 1--------------------")
+    best_Lsd = 9999999
+    global_step = 0
+    t_total = epoch[1] * len(train_loader)
+    
+
+    for i in range(epoch[1]):
+        total_loss = 0
+        total_lsd = 0
+        model.zero_grad()
+        model.train()
+        epoch_iterator = tqdm(train_loader,
+                              desc="Training (X / X Steps) (loss=X.X)",
+                              bar_format="{l_bar}{r_bar}",
+                              dynamic_ncols=True)
+        for data in epoch_iterator:
+            Hi_audio = data['Hi_audio']
+            Lo_audio = data['Lo_audio']
+            
+            Lo_res,Hi_res = model(Hi_audio)
+            loss_lo = F_MSE_Loss(Lo_res,Lo_audio)
+            loss_hi = F_MSE_Loss(Hi_res,Hi_audio)
+            loss = 0.5 * loss_lo + 0.5 * loss_hi
+            epoch_iterator.set_description(
+                    "Training (%d / %d Steps) (loss=%2.5f)" % (global_step, t_total, loss.item()))
+            loss.backward()
+            total_loss += loss.item()
+            optimizer.step()
+            optimizer.zero_grad()
+            global_step += 1
+          
+
+            lsd = LSD(Hi_res,Hi_audio)
+            total_lsd += lsd
+
+        Lsd = total_lsd / len(train_loader)
+        err = total_loss/ len(train_loader)
+        logger.info('finish training {} epoch, Loss = {}, LSD = {}'.format(i+1, err, Lsd))
+        total_lsd = 0
+        if Lsd < best_Lsd:
+            best_Lsd = Lsd
+            save_checkpoint(model,config,'ph2')
+            logger.info("Saved model checkpoint to [DIR: %s]", config['ckpt'])
+    logger.info("--------------------Finish training Phase 2--------------------")
     return 
     
 
@@ -82,7 +122,7 @@ def get_dataloader(file,mode='train'):
     bwe_dataset = BWE_dataset(sample_list,mode=mode)
     if mode == 'train':    
         data_loader = DataLoader(bwe_dataset,
-                            batch_size = 4,
+                            batch_size = 24,
                             shuffle=True,
                             drop_last=True,
                             num_workers = 0)
@@ -106,15 +146,17 @@ def main(config):
     train_loader = get_dataloader(train_file,mode='train')
 
     
-    model = WaveNet(channels_in=1,channels_out=256)
+    model = X_net()
     
     
-    if os.path.isfile('{}/model.pth'.format(ckpt)):
+    if os.path.isfile('{}/model_ph1.pth'.format(ckpt)):
         logger.info("------resuming last training------")
-        checkpoint = torch.load('{}/model.pth'.format(ckpt),map_location='cpu')
+        checkpoint = torch.load('{}/model_ph1.pth'.format(ckpt),map_location='cpu')
+        model.load_state_dict(checkpoint['net'])
+        checkpoint = torch.load('{}/model_ph2.pth'.format(ckpt),map_location='cpu')
         model.load_state_dict(checkpoint['net'])
     
-    model = model.to('cuda')
+
     
     optimizer = Adam(model.parameters(),lr = 1e-4)
 

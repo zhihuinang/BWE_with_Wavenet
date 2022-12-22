@@ -64,35 +64,36 @@ def inv_mulaw_quantize(y, mu=256):
 
 
 def LSD(output,target):
-    output = np.array(output)
-    target = np.array(target)
-    B,_ = output.shape
-    total_lsd = 0
-    for i in range(B):
-        target_spectrogram = librosa.core.stft(target[i,:], n_fft=2048)
-        output_spectrogram = librosa.core.stft(output[i,:], n_fft=2048)
- 
-        target_log = np.log10(np.abs(target_spectrogram) ** 2)
-        output_log = np.log10(np.abs(output_spectrogram) ** 2)
-        output_target_squared = (output_log - target_log) ** 2
-        lsd = 2 * (np.sum(output_target_squared))/(1024 * output_spectrogram.shape[1])
-
-        total_lsd += lsd
-    lsd = total_lsd / B
-    return lsd
+    output = output* (2**15)
+    target = target * (2**15)
+    spec_output = torch.log10(torch.abs(torch.stft(output,2048,return_complex=True)).clamp(1e-10,999999))
+    spec_target = torch.log10(torch.abs(torch.stft(target,2048,return_complex=True)).clamp(1e-10,999999))
+    distants =torch.mean((spec_output-spec_target)**2,dim=1) 
+    B,L = distants.shape
+    lsd = torch.sum(distants,dim=1) * 2 / L
+    return torch.mean(lsd)
 
 
 
 
 
 
-def save_checkpoint(model, config):
+def save_checkpoint(model, config,name):
     checkpoint = {
             "net": model.state_dict(keep_vars=True),
         }
     ckpt = config["ckpt"]
     os.makedirs(ckpt,exist_ok=True)
     torch.save(checkpoint,
-                  '{}/model.pth'.format(ckpt))
+                  '{}/model_{}.pth'.format(ckpt,name))
     
 
+def T_MSE_Loss(output,target):
+    return torch.nn.functional.mse_loss(output,target)
+
+def F_MSE_Loss(output,target):
+    spec_output = torch.abs(torch.stft(output,2048,return_complex=True))
+    spec_target = torch.abs(torch.stft(target,2048,return_complex=True))
+
+    return torch.nn.functional.mse_loss(spec_output,spec_target)
+    

@@ -1,4 +1,4 @@
-ckpt: './result/wavenet_000'
+ckpt: './result/x_net_demo'
 train_file: './data/train_demo.csv' 
 test_file: './data/test.csv'
-epoch: 10
+epoch: [10,50]
