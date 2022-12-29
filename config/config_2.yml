@@ -1,0 +1,4 @@
+ckpt: './result/X_net_2_0.5s'
+train_file: './data/train.csv' 
+test_file: './data/test.csv'
+epoch: [10,50]

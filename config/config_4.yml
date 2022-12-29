@@ -1,0 +1,4 @@
+ckpt: './result/Dilation_X_net_3'
+train_file: './data/train.csv' 
+test_file: './data/test.csv'
+epoch: [10,50]

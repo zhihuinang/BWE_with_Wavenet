@@ -34,7 +34,7 @@ class Scale_Down(nn.Module):
 
     def forward(self,input):
         output = self.conv1(input)
-        output = self.conv2(output)
+        output = F.tanh(self.conv2(output))
         return output
 
 class Scale_Up(nn.Module):
@@ -44,7 +44,7 @@ class Scale_Up(nn.Module):
         self.conv2 = Causalconv1d(out_channel,1,1,16,stride=1)
     def forward(self,input):
         output = Swish(self.conv1(input))
-        output = Swish(self.conv2(output))
+        output = F.tanh(self.conv2(output))
         return output
 
 class X_net(nn.Module):
@@ -56,13 +56,13 @@ class X_net(nn.Module):
         input = input.unsqueeze(1)
         if mode == 'down+up':
             Lo_res = self.scale_down(input)
-            Lo_input = torch.cat((Lo_res,Lo_res),dim=2)
+            Lo_input = torch.repeat_interleave(Lo_res,2,dim=2)
             Hi_res = self.scale_up(Lo_input)
             Lo_res = Lo_res.squeeze()
             Hi_res = Hi_res.squeeze()
             return Lo_res, Hi_res
         elif mode == 'up':
-            input = torch.cat((input,input),dim=2)
+            input = torch.repeat_interleave(input,2,dim=2)
             Hi_res = self.scale_up(input)
             Hi_res = Hi_res.squeeze()
             return Hi_res

@@ -4,7 +4,9 @@ import librosa
 import logging
 import os
 import numpy as np
-
+import time
+import soundfile as sf
+from pesq import pesq
 
 logger = logging.getLogger(__name__)
 
@@ -64,19 +66,44 @@ def inv_mulaw_quantize(y, mu=256):
 
 
 def LSD(output,target):
-    output = output* (2**15)
-    target = target * (2**15)
+    output = output.detach()
+    target = target.detach()
     spec_output = torch.log10(torch.abs(torch.stft(output,2048,return_complex=True)).clamp(1e-10,999999))
     spec_target = torch.log10(torch.abs(torch.stft(target,2048,return_complex=True)).clamp(1e-10,999999))
-    distants =torch.mean((spec_output-spec_target)**2,dim=1) 
+    distants =torch.sqrt(torch.mean((spec_output-spec_target)**2,dim=1)) 
     B,L = distants.shape
     lsd = torch.sum(distants,dim=1) * 2 / L
     return torch.mean(lsd)
 
 
 
+def SNR(output,target):
+    output = output.detach()
+    target = target.detach()
+    
+    dif = (target-output).norm(p=2,dim=1)
+    y_2 = target.norm(p=2,dim=1)
+    
+    snr = 10*torch.log2(y_2/dif)
+    return torch.mean(snr)
 
 
+def PESQ(output,target):
+    output = output.detach().numpy()
+    target = target.detach().numpy()
+    p_total = 0
+    B = output.shape[0]
+    for i in range(B):
+        o = output[i,:]
+        t = target[i,:]
+        try:
+            p = pesq(16000,t,o,'wb')
+        except Exception:
+            p=0
+        p_total += p
+    return p_total/B
+
+    
 
 def save_checkpoint(model, config,name):
     checkpoint = {
@@ -97,3 +124,9 @@ def F_MSE_Loss(output,target):
 
     return torch.nn.functional.mse_loss(spec_output,spec_target)
     
+
+def write_audio(Hi_res,fname,config):
+    Hi_res = Hi_res.detach().numpy()
+    ckpt = config['ckpt']+'/demo/'
+    os.makedirs(ckpt,exist_ok=True)
+    sf.write(ckpt+fname[0],Hi_res,samplerate=16000)

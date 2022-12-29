@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader
 from torch.optim import Adam
 
 from model.X_net import *
+from model.dilation_X_net import *
 from dataset.dataloader import *
 from utils import *
 
@@ -28,6 +29,8 @@ def eval(model,test_loader):
     
     total_loss = 0
     total_lsd = 0
+    total_snr = 0
+    total_pesq = 0
     model.zero_grad()
     model.eval()
     epoch_iterator = tqdm(test_loader,
@@ -47,11 +50,17 @@ def eval(model,test_loader):
         global_step += 1
         
         lsd = LSD(Hi_res,Hi_audio)
+        snr = SNR(Hi_res,Hi_audio)
+        pseq = PESQ(Hi_res,Hi_audio)
         total_lsd += lsd
+        total_snr += snr
+        total_pesq += pseq
 
     Lsd = total_lsd / len(test_loader)
-    err = total_loss/ len(test_loader)
-    logger.info('finish evaluation, Loss = {}, LSD = {}'.format(err, Lsd))
+    Snr = total_snr / len(test_loader)
+    Pesq = total_pesq / len(test_loader)
+    
+    logger.info('finish evaluation, LSD = {}, SNR = {}, PESQ = {}'.format(Lsd, Snr, Pesq))
     total_lsd = 0
    
     logger.info("--------------------Finish evaluation--------------------")
@@ -75,7 +84,7 @@ def get_dataloader(file,mode='train'):
                             num_workers = 0)
     else: 
         data_loader = DataLoader(bwe_dataset,
-                            batch_size = 8,
+                            batch_size = 24,
                             shuffle=False,
                             drop_last=True,
                             num_workers = 0)
@@ -92,14 +101,16 @@ def main(config):
     
     test_loader = get_dataloader(test_file,mode='test')
 
-    
-    model = X_net()
-    
+    model_type = config['model_type']
+
+    if model_type == 'X-net':
+        model = X_net()
+      
+    elif model_type == 'Dilation_X-net':
+        model = Dilation_X_net()
     
     if os.path.isfile('{}/model_ph1.pth'.format(ckpt)):
         logger.info("------resuming last training------")
-        checkpoint = torch.load('{}/model_ph1.pth'.format(ckpt),map_location='cpu')
-        model.load_state_dict(checkpoint['net'])
         checkpoint = torch.load('{}/model_ph2.pth'.format(ckpt),map_location='cpu')
         model.load_state_dict(checkpoint['net'])
     

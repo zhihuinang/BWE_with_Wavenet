@@ -1,0 +1,123 @@
+12/22/2022 14:21:51 - INFO - __main__ - finish training 1 epoch, Loss = 3.987304023035499e-05, LSD = 5.022997856140137
+12/22/2022 14:21:51 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:23:36 - INFO - __main__ - finish training 2 epoch, Loss = 3.40170985787659e-05, LSD = 5.130125045776367
+12/22/2022 14:25:24 - INFO - __main__ - finish training 3 epoch, Loss = 3.287252640878554e-05, LSD = 5.021739959716797
+12/22/2022 14:25:25 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:27:00 - INFO - __main__ - finish training 4 epoch, Loss = 3.2347552146600516e-05, LSD = 4.974379062652588
+12/22/2022 14:27:01 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:28:42 - INFO - __main__ - finish training 5 epoch, Loss = 3.189136986571207e-05, LSD = 5.13363790512085
+12/22/2022 14:30:29 - INFO - __main__ - finish training 6 epoch, Loss = 3.1873511558286635e-05, LSD = 5.174421310424805
+12/22/2022 14:32:09 - INFO - __main__ - finish training 7 epoch, Loss = 3.1574263674530004e-05, LSD = 5.255871772766113
+12/22/2022 14:33:52 - INFO - __main__ - finish training 8 epoch, Loss = 3.1554386863616754e-05, LSD = 5.144909858703613
+12/22/2022 14:35:36 - INFO - __main__ - finish training 9 epoch, Loss = 3.141077143848431e-05, LSD = 5.206855297088623
+12/22/2022 14:37:28 - INFO - __main__ - finish training 10 epoch, Loss = 3.131547182672673e-05, LSD = 5.369261741638184
+12/22/2022 14:37:28 - INFO - __main__ - --------------------Finish training Phase 1--------------------
+12/22/2022 14:39:17 - INFO - __main__ - finish training 1 epoch, Loss = 0.045195792788743146, LSD = 1.5548722743988037
+12/22/2022 14:39:17 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:41:04 - INFO - __main__ - finish training 2 epoch, Loss = 0.044284094758849174, LSD = 1.3563159704208374
+12/22/2022 14:41:04 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:42:50 - INFO - __main__ - finish training 3 epoch, Loss = 0.04428238712716848, LSD = 1.3120495080947876
+12/22/2022 14:42:51 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:44:39 - INFO - __main__ - finish training 4 epoch, Loss = 0.044195160243867174, LSD = 1.271444320678711
+12/22/2022 14:44:39 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:46:27 - INFO - __main__ - finish training 5 epoch, Loss = 0.04418406212547173, LSD = 1.2394773960113525
+12/22/2022 14:46:27 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:48:14 - INFO - __main__ - finish training 6 epoch, Loss = 0.04411408739785353, LSD = 1.207518219947815
+12/22/2022 14:48:14 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:50:01 - INFO - __main__ - finish training 7 epoch, Loss = 0.04403339815326035, LSD = 1.1843997240066528
+12/22/2022 14:50:02 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:51:49 - INFO - __main__ - finish training 8 epoch, Loss = 0.04409669504578536, LSD = 1.1664328575134277
+12/22/2022 14:51:50 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:53:42 - INFO - __main__ - finish training 9 epoch, Loss = 0.04407433904836782, LSD = 1.1415449380874634
+12/22/2022 14:53:43 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:55:33 - INFO - __main__ - finish training 10 epoch, Loss = 0.044071046544963285, LSD = 1.1258552074432373
+12/22/2022 14:55:33 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:57:18 - INFO - __main__ - finish training 11 epoch, Loss = 0.04406378020454819, LSD = 1.110178828239441
+12/22/2022 14:57:18 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 14:59:05 - INFO - __main__ - finish training 12 epoch, Loss = 0.04406715575734981, LSD = 1.0989303588867188
+12/22/2022 14:59:05 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:00:52 - INFO - __main__ - finish training 13 epoch, Loss = 0.04403360352929061, LSD = 1.0828454494476318
+12/22/2022 15:00:52 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:02:39 - INFO - __main__ - finish training 14 epoch, Loss = 0.04404291359242052, LSD = 1.0728955268859863
+12/22/2022 15:02:39 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:04:26 - INFO - __main__ - finish training 15 epoch, Loss = 0.04401317227166146, LSD = 1.061055302619934
+12/22/2022 15:04:26 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:06:13 - INFO - __main__ - finish training 16 epoch, Loss = 0.04396995406002841, LSD = 1.0510375499725342
+12/22/2022 15:06:14 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:08:00 - INFO - __main__ - finish training 17 epoch, Loss = 0.04400880739558488, LSD = 1.0415853261947632
+12/22/2022 15:08:01 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:09:47 - INFO - __main__ - finish training 18 epoch, Loss = 0.04398195004452848, LSD = 1.0322928428649902
+12/22/2022 15:09:48 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:11:35 - INFO - __main__ - finish training 19 epoch, Loss = 0.04393411801558816, LSD = 1.0258013010025024
+12/22/2022 15:11:36 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:13:22 - INFO - __main__ - finish training 20 epoch, Loss = 0.04376954898988414, LSD = 1.0168675184249878
+12/22/2022 15:13:22 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:15:09 - INFO - __main__ - finish training 21 epoch, Loss = 0.04385961791396969, LSD = 1.0067299604415894
+12/22/2022 15:15:09 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:16:56 - INFO - __main__ - finish training 22 epoch, Loss = 0.04393041426212423, LSD = 1.0060745477676392
+12/22/2022 15:16:56 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:18:42 - INFO - __main__ - finish training 23 epoch, Loss = 0.04390575647509346, LSD = 0.9935387372970581
+12/22/2022 15:18:43 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:20:30 - INFO - __main__ - finish training 24 epoch, Loss = 0.04392973986816489, LSD = 0.9933722615242004
+12/22/2022 15:20:30 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:22:17 - INFO - __main__ - finish training 25 epoch, Loss = 0.043931427605760597, LSD = 0.9854493737220764
+12/22/2022 15:22:17 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:24:04 - INFO - __main__ - finish training 26 epoch, Loss = 0.043782157829910934, LSD = 0.981374204158783
+12/22/2022 15:24:04 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:25:50 - INFO - __main__ - finish training 27 epoch, Loss = 0.04388425279951965, LSD = 0.9720836281776428
+12/22/2022 15:25:51 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:27:36 - INFO - __main__ - finish training 28 epoch, Loss = 0.04393051228382521, LSD = 0.9742568135261536
+12/22/2022 15:29:33 - INFO - __main__ - finish training 29 epoch, Loss = 0.04390731544440819, LSD = 0.9691696166992188
+12/22/2022 15:29:33 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:31:21 - INFO - __main__ - finish training 30 epoch, Loss = 0.04388984262995008, LSD = 0.9627647399902344
+12/22/2022 15:31:22 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:33:13 - INFO - __main__ - finish training 31 epoch, Loss = 0.04388288647169247, LSD = 0.9593504667282104
+12/22/2022 15:33:13 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:35:03 - INFO - __main__ - finish training 32 epoch, Loss = 0.04385689620135559, LSD = 0.9559814929962158
+12/22/2022 15:35:04 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:36:53 - INFO - __main__ - finish training 33 epoch, Loss = 0.043882465242253, LSD = 0.9509592056274414
+12/22/2022 15:36:53 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:38:43 - INFO - __main__ - finish training 34 epoch, Loss = 0.04385394747239641, LSD = 0.9495373964309692
+12/22/2022 15:38:43 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:40:32 - INFO - __main__ - finish training 35 epoch, Loss = 0.04386631937490569, LSD = 0.9441235661506653
+12/22/2022 15:40:32 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:42:22 - INFO - __main__ - finish training 36 epoch, Loss = 0.04384181916248053, LSD = 0.9430070519447327
+12/22/2022 15:42:22 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:44:12 - INFO - __main__ - finish training 37 epoch, Loss = 0.043780898067375854, LSD = 0.9372979402542114
+12/22/2022 15:44:12 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:46:01 - INFO - __main__ - finish training 38 epoch, Loss = 0.04383956657774332, LSD = 0.9378681182861328
+12/22/2022 15:48:01 - INFO - __main__ - finish training 39 epoch, Loss = 0.043834436199783035, LSD = 0.9340417385101318
+12/22/2022 15:48:02 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:49:53 - INFO - __main__ - finish training 40 epoch, Loss = 0.04380869764524201, LSD = 0.9307529926300049
+12/22/2022 15:49:53 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:51:42 - INFO - __main__ - finish training 41 epoch, Loss = 0.043750320496555, LSD = 0.927820086479187
+12/22/2022 15:51:43 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:53:35 - INFO - __main__ - finish training 42 epoch, Loss = 0.04379143633155359, LSD = 0.9258400797843933
+12/22/2022 15:53:35 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:55:26 - INFO - __main__ - finish training 43 epoch, Loss = 0.04380845930427313, LSD = 0.9214545488357544
+12/22/2022 15:55:26 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 15:57:16 - INFO - __main__ - finish training 44 epoch, Loss = 0.043799820854069874, LSD = 0.9221091866493225
+12/22/2022 15:59:15 - INFO - __main__ - finish training 45 epoch, Loss = 0.04379899241676968, LSD = 0.9192376732826233
+12/22/2022 15:59:15 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 16:01:05 - INFO - __main__ - finish training 46 epoch, Loss = 0.04378545696252129, LSD = 0.913661003112793
+12/22/2022 16:01:06 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 16:02:55 - INFO - __main__ - finish training 47 epoch, Loss = 0.043788662063889205, LSD = 0.9174879789352417
+12/22/2022 16:04:56 - INFO - __main__ - finish training 48 epoch, Loss = 0.043782276567071676, LSD = 0.9113671183586121
+12/22/2022 16:04:57 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 16:06:50 - INFO - __main__ - finish training 49 epoch, Loss = 0.04377764612177594, LSD = 0.9088431596755981
+12/22/2022 16:06:50 - INFO - __main__ - Saved model checkpoint to [DIR: ./result/X_net_1]
+12/22/2022 16:08:38 - INFO - __main__ - finish training 50 epoch, Loss = 0.043805918177693255, LSD = 0.9089598059654236
+12/22/2022 16:08:38 - INFO - __main__ - --------------------Finish training Phase 2--------------------
+12/22/2022 16:10:15 - INFO - __main__ - ------resuming last training------
+12/22/2022 16:10:24 - INFO - __main__ - finish evaluation, Loss = 3.859107225244126e-05, LSD = 0.9850559234619141
+12/22/2022 16:10:24 - INFO - __main__ - --------------------Finish evaluation--------------------
+12/22/2022 16:11:55 - INFO - __main__ - ------resuming last training------
+12/22/2022 16:11:59 - INFO - __main__ - finish evaluation, Loss = 0.005373643923695516, LSD = 2.2721874713897705
+12/22/2022 16:11:59 - INFO - __main__ - --------------------Finish evaluation--------------------
+12/22/2022 16:25:37 - INFO - __main__ - ------resuming last training------
+12/22/2022 16:25:46 - INFO - __main__ - finish evaluation, Loss = 0.005203556877479536, LSD = 11.260013580322266
+12/22/2022 16:25:46 - INFO - __main__ - --------------------Finish evaluation--------------------
+12/22/2022 16:26:14 - INFO - __main__ - ------resuming last training------
+12/22/2022 16:26:16 - INFO - __main__ - finish evaluation, Loss = 0.005373643923695516, LSD = 2.2721874713897705
+12/22/2022 16:26:16 - INFO - __main__ - --------------------Finish evaluation--------------------
+12/23/2022 16:22:31 - INFO - __main__ - ------resuming last training------

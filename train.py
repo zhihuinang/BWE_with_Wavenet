@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader
 from torch.optim import Adam
 
 from model.X_net import *
+from model.dilation_X_net import *
 from dataset.dataloader import *
 from utils import *
 
@@ -122,10 +123,10 @@ def get_dataloader(file,mode='train'):
     bwe_dataset = BWE_dataset(sample_list,mode=mode)
     if mode == 'train':    
         data_loader = DataLoader(bwe_dataset,
-                            batch_size = 24,
+                            batch_size = 48,
                             shuffle=True,
                             drop_last=True,
-                            num_workers = 0)
+                            num_workers = 4)
     else: 
         data_loader = DataLoader(bwe_dataset,
                             batch_size = 8,
@@ -145,17 +146,19 @@ def main(config):
     
     train_loader = get_dataloader(train_file,mode='train')
 
+    model_type = config['model_type']
     
-    model = X_net()
-    
+    if model_type == 'X-net':
+        model = X_net()
+      
+    elif model_type == 'Dilation_X-net':
+        model = Dilation_X_net()
     
     if os.path.isfile('{}/model_ph1.pth'.format(ckpt)):
         logger.info("------resuming last training------")
-        checkpoint = torch.load('{}/model_ph1.pth'.format(ckpt),map_location='cpu')
-        model.load_state_dict(checkpoint['net'])
         checkpoint = torch.load('{}/model_ph2.pth'.format(ckpt),map_location='cpu')
         model.load_state_dict(checkpoint['net'])
-    
+        
 
     
     optimizer = Adam(model.parameters(),lr = 1e-4)

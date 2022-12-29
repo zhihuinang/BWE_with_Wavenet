@@ -1,4 +1,0 @@
-ckpt: './result/wavenet_1'
-train_file: './data/train.csv' 
-test_file: './data/test.csv'
-epoch: 3
